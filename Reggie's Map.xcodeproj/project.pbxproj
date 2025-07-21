@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6B7B1C9333253AC0786F304C /* Pods_Reggie_s_Map_Reggie_s_MapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE13901DF5719A8B88E00255 /* Pods_Reggie_s_Map_Reggie_s_MapUITests.framework */; };
+		765349495BA114B35547D740 /* Pods_Reggie_s_MapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C0DFBB3F19439B0E900F60 /* Pods_Reggie_s_MapTests.framework */; };
+		CE7FBA9A6BD8F42B072D2381 /* Pods_Reggie_s_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67A2BC0250FADCCBA26857C4 /* Pods_Reggie_s_Map.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		464FA9542E026585005B459B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +30,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00C0DFBB3F19439B0E900F60 /* Pods_Reggie_s_MapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reggie_s_MapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04CD2CCD63EE829BA494FFB8 /* Pods-Reggie's Map-Reggie's MapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reggie's Map-Reggie's MapUITests.debug.xcconfig"; path = "Target Support Files/Pods-Reggie's Map-Reggie's MapUITests/Pods-Reggie's Map-Reggie's MapUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		12D662777EB6A09DB6486DCB /* Pods-Reggie's MapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reggie's MapTests.release.xcconfig"; path = "Target Support Files/Pods-Reggie's MapTests/Pods-Reggie's MapTests.release.xcconfig"; sourceTree = "<group>"; };
+		13BA5962872E3DCB767229C6 /* Pods-Reggie's MapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reggie's MapTests.debug.xcconfig"; path = "Target Support Files/Pods-Reggie's MapTests/Pods-Reggie's MapTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1ED920B14CB5A9C3DE63E3B9 /* Pods-Reggie's Map-Reggie's MapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reggie's Map-Reggie's MapUITests.release.xcconfig"; path = "Target Support Files/Pods-Reggie's Map-Reggie's MapUITests/Pods-Reggie's Map-Reggie's MapUITests.release.xcconfig"; sourceTree = "<group>"; };
 		464FA9462E026582005B459B /* Reggie's Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reggie's Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		464FA9532E026585005B459B /* Reggie's MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reggie's MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		464FA95D2E026585005B459B /* Reggie's MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reggie's MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		59C5572590F87A387CA14F08 /* Pods-Reggie's Map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reggie's Map.debug.xcconfig"; path = "Target Support Files/Pods-Reggie's Map/Pods-Reggie's Map.debug.xcconfig"; sourceTree = "<group>"; };
+		67A2BC0250FADCCBA26857C4 /* Pods_Reggie_s_Map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reggie_s_Map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FDFDED9A14B4096F95376BF /* Pods-Reggie's Map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reggie's Map.release.xcconfig"; path = "Target Support Files/Pods-Reggie's Map/Pods-Reggie's Map.release.xcconfig"; sourceTree = "<group>"; };
+		EE13901DF5719A8B88E00255 /* Pods_Reggie_s_Map_Reggie_s_MapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reggie_s_Map_Reggie_s_MapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7FBA9A6BD8F42B072D2381 /* Pods_Reggie_s_Map.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				765349495BA114B35547D740 /* Pods_Reggie_s_MapTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B7B1C9333253AC0786F304C /* Pods_Reggie_s_Map_Reggie_s_MapUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +97,8 @@
 				464FA9562E026585005B459B /* Reggie's MapTests */,
 				464FA9602E026585005B459B /* Reggie's MapUITests */,
 				464FA9472E026582005B459B /* Products */,
+				B24617FDC420F650D5D37E53 /* Pods */,
+				CA7A399C7A71EC7C24D8CC87 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +112,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B24617FDC420F650D5D37E53 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				59C5572590F87A387CA14F08 /* Pods-Reggie's Map.debug.xcconfig */,
+				6FDFDED9A14B4096F95376BF /* Pods-Reggie's Map.release.xcconfig */,
+				04CD2CCD63EE829BA494FFB8 /* Pods-Reggie's Map-Reggie's MapUITests.debug.xcconfig */,
+				1ED920B14CB5A9C3DE63E3B9 /* Pods-Reggie's Map-Reggie's MapUITests.release.xcconfig */,
+				13BA5962872E3DCB767229C6 /* Pods-Reggie's MapTests.debug.xcconfig */,
+				12D662777EB6A09DB6486DCB /* Pods-Reggie's MapTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CA7A399C7A71EC7C24D8CC87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				67A2BC0250FADCCBA26857C4 /* Pods_Reggie_s_Map.framework */,
+				EE13901DF5719A8B88E00255 /* Pods_Reggie_s_Map_Reggie_s_MapUITests.framework */,
+				00C0DFBB3F19439B0E900F60 /* Pods_Reggie_s_MapTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 464FA9672E026585005B459B /* Build configuration list for PBXNativeTarget "Reggie's Map" */;
 			buildPhases = (
+				9E14E6A4697588B3F05E2F1B /* [CP] Check Pods Manifest.lock */,
 				464FA9422E026582005B459B /* Sources */,
 				464FA9432E026582005B459B /* Frameworks */,
 				464FA9442E026582005B459B /* Resources */,
+				70C1F21CB7FF034DAEABB663 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -111,8 +156,6 @@
 				464FA9482E026582005B459B /* Reggie's Map */,
 			);
 			name = "Reggie's Map";
-			packageProductDependencies = (
-			);
 			productName = "Reggie's Map";
 			productReference = 464FA9462E026582005B459B /* Reggie's Map.app */;
 			productType = "com.apple.product-type.application";
@@ -121,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 464FA96A2E026585005B459B /* Build configuration list for PBXNativeTarget "Reggie's MapTests" */;
 			buildPhases = (
+				ADA87D09EC93E1C1E9DD1E42 /* [CP] Check Pods Manifest.lock */,
 				464FA94F2E026585005B459B /* Sources */,
 				464FA9502E026585005B459B /* Frameworks */,
 				464FA9512E026585005B459B /* Resources */,
@@ -134,8 +178,6 @@
 				464FA9562E026585005B459B /* Reggie's MapTests */,
 			);
 			name = "Reggie's MapTests";
-			packageProductDependencies = (
-			);
 			productName = "Reggie's MapTests";
 			productReference = 464FA9532E026585005B459B /* Reggie's MapTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -144,9 +186,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 464FA96D2E026585005B459B /* Build configuration list for PBXNativeTarget "Reggie's MapUITests" */;
 			buildPhases = (
+				30CE5DA61187BDB07B56995A /* [CP] Check Pods Manifest.lock */,
 				464FA9592E026585005B459B /* Sources */,
 				464FA95A2E026585005B459B /* Frameworks */,
 				464FA95B2E026585005B459B /* Resources */,
+				65784EA3BEBC39754C822957 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -157,8 +201,6 @@
 				464FA9602E026585005B459B /* Reggie's MapUITests */,
 			);
 			name = "Reggie's MapUITests";
-			packageProductDependencies = (
-			);
 			productName = "Reggie's MapUITests";
 			productReference = 464FA95D2E026585005B459B /* Reggie's MapUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -230,6 +272,117 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30CE5DA61187BDB07B56995A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reggie's Map-Reggie's MapUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65784EA3BEBC39754C822957 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reggie's Map-Reggie's MapUITests/Pods-Reggie's Map-Reggie's MapUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reggie's Map-Reggie's MapUITests/Pods-Reggie's Map-Reggie's MapUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Reggie's Map-Reggie's MapUITests/Pods-Reggie's Map-Reggie's MapUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70C1F21CB7FF034DAEABB663 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reggie's Map/Pods-Reggie's Map-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Reggie's Map/Pods-Reggie's Map-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Reggie's Map/Pods-Reggie's Map-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E14E6A4697588B3F05E2F1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reggie's Map-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADA87D09EC93E1C1E9DD1E42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Reggie's MapTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		464FA9422E026582005B459B /* Sources */ = {
@@ -392,6 +545,7 @@
 		};
 		464FA9682E026585005B459B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59C5572590F87A387CA14F08 /* Pods-Reggie's Map.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -405,13 +559,20 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "it358.Reggie-s-Map";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -420,6 +581,7 @@
 		};
 		464FA9692E026585005B459B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FDFDED9A14B4096F95376BF /* Pods-Reggie's Map.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -433,13 +595,20 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "it358.Reggie-s-Map";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -448,6 +617,7 @@
 		};
 		464FA96B2E026585005B459B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13BA5962872E3DCB767229C6 /* Pods-Reggie's MapTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -467,6 +637,7 @@
 		};
 		464FA96C2E026585005B459B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12D662777EB6A09DB6486DCB /* Pods-Reggie's MapTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -486,6 +657,7 @@
 		};
 		464FA96E2E026585005B459B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04CD2CCD63EE829BA494FFB8 /* Pods-Reggie's Map-Reggie's MapUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -503,6 +675,7 @@
 		};
 		464FA96F2E026585005B459B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1ED920B14CB5A9C3DE63E3B9 /* Pods-Reggie's Map-Reggie's MapUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
