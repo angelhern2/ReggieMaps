@@ -1,60 +1,62 @@
-//
-//  DinningView.swift
-//  Reggie's Map
-//
-//  Created by angel hernandez on 6/23/25.
-//
 import SwiftUI
 
 struct DinningView: View {
-    
-    @StateObject private var allResturants = RestaurantsViewModel()
-    
-    
+    @StateObject private var viewModel = DinningModelView()
+
     var body: some View {
-    VStack(alignment: .leading , spacing: 20){
-    
         NavigationView {
-        VStack{
-            
-            List {
-                ForEach(allResturants.restaurants) { restaurant in
-                        HStack
-                        {
-                            VStack{
-                                Image(restaurant.image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame( maxWidth: 60, maxHeight: 60)
-                            }
-                                Text(restaurant.name)
-                            
-                            Spacer()
-                            
-                            Image(systemName: "globe.americas.fill")
-                                .foregroundColor(.blue)
-                            Image(systemName: "arrow.trianglehead.turn.up.right.diamond")
-                                .foregroundColor(.blue)
-                        }
-                        .frame(maxWidth: .infinity , maxHeight: 80)
-                        
+            VStack {
+                if let error = viewModel.errorMessage {
+                    Text(error)
+                        .foregroundColor(.red)
+                        .padding()
                 }
-                // this is were the tool pars would go
+                
+                if viewModel.isLoading {
+                    ProgressView("Searching nearby restaurants...")
+                        .padding()
+                } else if viewModel.restaurants.isEmpty {
+                    Text("No restaurants found nearby.")
+                        .padding()
+                } else {
+                    List(viewModel.restaurants) { restaurant in
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text(restaurant.name)
+                                .font(.headline)
+                            Text(restaurant.address)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            if let phone = restaurant.phone {
+                                Text("Phone: \(phone)")
+                                    .font(.footnote)
+                            }
+                            if let website = restaurant.website {
+                                Text("Website: \(website)")
+                                    .font(.footnote)
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    .listStyle(InsetGroupedListStyle())
+                }
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Nearby Food")
+            .navigationTitle("Nearby Restaurants")
             .toolbar {
-                //   EditButton() instead of edit button maybe a filter button
+                Button(action: {
+                    viewModel.startSearchingNearby()
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                }
+                .accessibilityLabel("Refresh")
+            }
+            .onAppear {
+                viewModel.startSearchingNearby()
             }
         }
-        }
-            
-        }
-        
     }
 }
 
 #Preview {
     DinningView()
 }
-

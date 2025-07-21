@@ -1,7 +1,8 @@
-//
-//  Map.swift
-//  Reggie's Map
-//
-//  Created by angel hernandez on 6/26/25.
-//
+import Foundation
+import CoreLocation
 
+struct CampusBuilding: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+}

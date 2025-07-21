@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Reggie's Map
-//
-//  Created by angel hernandez on 6/17/25.
-//
-
 import SwiftUI
 
 extension Color {
@@ -13,106 +6,90 @@ extension Color {
 }
 
 struct ContentView: View {
-    
+
     @State private var selection: Int = 0
-    
+
     var body: some View {
-        
-        VStack{
+        VStack(spacing: 0) {
             switch selection {
-            case 0:
-                HomeView()
-                
-            case 1:
-                MapView()
-                
-            case 2:
-                DinningView()
-                
-            case 3:
-                ExploreView()
-            case 4:
-                SettingsView()
-                
-            default:
-                HomeView()
+            case 0: AnyView(HomeView())
+            case 1: AnyView(MapView())
+            case 2: AnyView(DinningView())
+            case 3: AnyView(ExploreView())
+            case 4: AnyView(SettingsView())
+            default: AnyView(HomeView())
             }
-        }
-        
-        Spacer()
-            HStack{
+            
+            // Bottom Tab Bar
+            HStack {
                 Spacer()
-                Button{
+                Button {
                     selection = 1
                 } label: {
                     Image(systemName: "map.circle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity , maxHeight: .infinity)
-                        .foregroundColor(.PrimaryColor)
+                        .frame(height: 30)
+                        .foregroundColor(selection == 1 ? .PrimaryColor : .gray)
                         .padding(.top, 10)
                 }
                 Spacer()
-                Button{
+                Button {
                     selection = 2
                 } label: {
                     Image(systemName: "fork.knife.circle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity , maxHeight: .infinity)
-                        .foregroundColor(.PrimaryColor)
+                        .frame(height: 30)
+                        .foregroundColor(selection == 2 ? .PrimaryColor : .gray)
                         .padding(.top, 10)
                 }
                 Spacer()
-                Button{
+                Button {
                     selection = 0
                 } label: {
                     Image("ISU_we_teach_logo.png")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity , maxHeight: .infinity)
+                        .frame(height: 30)
                         .padding(.top, 7)
-                        
+                        .opacity(selection == 0 ? 1 : 0.6)
                 }
                 Spacer()
-                Button{
+                Button {
                     selection = 3
                 } label: {
                     Image(systemName: "newspaper.circle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity , maxHeight: .infinity)
-                        .foregroundColor(.PrimaryColor)
-                        .padding(.top ,10)
+                        .frame(height: 30)
+                        .foregroundColor(selection == 3 ? .PrimaryColor : .gray)
+                        .padding(.top, 10)
                 }
                 Spacer()
-                Button{
+                Button {
                     selection = 4
                 } label: {
                     Image(systemName: "gearshape.circle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity , maxHeight: .infinity)
-                        .foregroundColor(.PrimaryColor)
-                        .padding(.top ,10)
+                        .frame(height: 30)
+                        .foregroundColor(selection == 4 ? .PrimaryColor : .gray)
+                        .padding(.top, 10)
                 }
                 Spacer()
-            }                           // hstack end
-            .overlay(alignment: .top) {
-            Rectangle()
+            }
+            .overlay(
+                Rectangle()
                     .foregroundColor(.PrimaryColor)
-                .frame(height: 1) // Adjust the height as needed
+                    .frame(height: 1),
+                alignment: .top
+            )
+            .frame(height: 60)
         }
-          //  .background(Color("SecondaryColor"))
-            .frame(height: 60 , alignment: .bottomLeading)
-       
-            
-     
-    }                                       // body end bracket
-}                                           //contentview end braket
-
-
-
+        .edgesIgnoringSafeArea(.bottom)
+    }
+}
 
 #Preview {
     ContentView()
