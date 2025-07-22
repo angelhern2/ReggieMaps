@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GooglePlaces
 
 extension Color {
     static let PrimaryColor = Color("PrimaryColor")
@@ -15,6 +16,7 @@ extension Color {
 
 
 struct ContentView: View {
+
     // state for navagation
     @State private var selection: Int = 0
     
@@ -200,8 +202,11 @@ struct ContentView: View {
 }                                           //contentview end braket
 
 
-
-
-#Preview {
-    ContentView()
+        // Autocomplete Sheet
+        .sheet(isPresented: $showAutocomplete) {
+            AutocompleteView { place in
+                self.selectedPlaceName = place.name
+            }
+        }
+    }
 }
