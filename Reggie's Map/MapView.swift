@@ -7,12 +7,24 @@
 import SwiftUI
 
 struct MapView: View {
+    
+    
+    
     var body: some View {
+        // here and below wil be the actual map which they will be able to view the map
         
-        Text("map page")
+        VStack{
+            Text("map page")
+    
+        }
         
     }
-}
+    
+    
+    
+    
+    
+} // end of entire view bracket
 
 #Preview {
     MapView()

@@ -7,9 +7,14 @@
 import SwiftUI
 
 struct ExploreView: View {
+
+    
     var body: some View {
         
-        Text("explore page")
+        Text( "edxplore view")
+
+        
+        
         
     }
 }
