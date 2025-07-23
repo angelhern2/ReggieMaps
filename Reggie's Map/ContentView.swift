@@ -31,33 +31,46 @@ struct ContentView: View {
             switch selection {
             case 0:
                 searchHeaderSection                                              // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)// rectangle to create underline
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.PrimaryColor)// rectangle to create underline
                 ScrollView{
                     HomeView()
                 }
                 
             case 1:
                 searchHeaderSection                                                   // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)  // rectangle to create underline
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.PrimaryColor)  // rectangle to create underline
                 MapView()
                 
             case 2:
-                searchHeaderSection                                                   // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)  // rectangle to create underline
-                ScrollView{
+                VStack(spacing: 0) {
+                    searchHeaderSection
+                    Rectangle()
+                        .frame(height: 1)
+                        .foregroundColor(.PrimaryColor)
+
                     DinningView()
+                        .frame(maxHeight: .infinity)
                 }
+
                 
             case 3:
                 searchHeaderSection                                                   // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)// rectangle to create underline
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.PrimaryColor)// rectangle to create underline
                 ExploreView()
             case 4:
                 SettingsView()
                 
             default:
                 searchHeaderSection                                                   // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)// rectangle to create underline
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.PrimaryColor)// rectangle to create underline
                 ScrollView{
                     HomeView()
                 }

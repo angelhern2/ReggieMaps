@@ -14,14 +14,10 @@ struct HomeView: View {
                             await viewModel.fetchNews()
                         }
                     }) {
-                        Image(systemName: "arrow.clockwise")
-                        Text("Refresh")
+            
+        
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                    .background(Color.blue.opacity(0.2))
-                    .cornerRadius(8)
-                    Spacer()
+
                 }
                 .padding(.top)
 
