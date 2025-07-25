@@ -1,10 +1,13 @@
 import Foundation
+import MapKit
 import CoreLocation
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var buildings: [CampusBuilding] = []
     @Published var selectedBuilding: CampusBuilding?
+    @Published var route: MKRoute?
+    @Published var searchText: String = ""
 
     private let locationManager = CLLocationManager()
 
@@ -12,13 +15,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
         locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         loadBuildings()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last?.coordinate
     }
     
     
@@ -65,4 +64,39 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             CampusBuilding(name: "Warehouse Road Complex 2", coordinate: CLLocationCoordinate2D(latitude: 40.54497, longitude: -88.98852))
         ]
     }
-}
+        
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            guard let location = locations.last else { return }
+            DispatchQueue.main.async {
+                self.userLocation = location.coordinate
+            }
+        }
+
+        func calculateRoute(to destination: CLLocationCoordinate2D) {
+            guard let userLoc = userLocation else { return }
+
+            let request = MKDirections.Request()
+            request.source = MKMapItem(placemark: MKPlacemark(coordinate: userLoc))
+            request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+            request.transportType = .walking
+
+            let directions = MKDirections(request: request)
+            directions.calculate { [weak self] response, error in
+                if let route = response?.routes.first {
+                    DispatchQueue.main.async {
+                        self?.route = route
+                    }
+                }
+            }
+        }
+
+        var filteredBuildings: [CampusBuilding] {
+            if searchText.isEmpty {
+                return buildings
+            } else {
+                return buildings.filter {
+                    $0.name.localizedCaseInsensitiveContains(searchText)
+                }
+            }
+        }
+    }
