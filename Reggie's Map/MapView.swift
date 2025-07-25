@@ -2,34 +2,82 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @State private var longzoom = 0.01
     @StateObject private var vm = MapViewModel()
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 40.5130, longitude: -88.99),
-        span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+    @State private var cameraPosition: MapCameraPosition = .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 40.5130, longitude: -88.99),
+            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        )
     )
-    
+
     var body: some View {
-        Stepper("Zoom", value: $longzoom, in: 0...1, step: 0.001)
-            Map(coordinateRegion: $region, annotationItems: vm.buildings) { building in
-                MapAnnotation(coordinate: building.coordinate) {
+        Map(position: $cameraPosition) {
+            // Show user's blue dot
+            if let userCoord = vm.userLocation {
+                Annotation("You", coordinate: userCoord) {
+                    Circle()
+                        .fill(Color.blue)
+                        .frame(width: 12, height: 12)
+                        .shadow(radius: 4)
+                }
+            }
+
+            // Show building annotations
+            ForEach(vm.buildings) { building in
+                Annotation(building.name, coordinate: building.coordinate) {
                     VStack(spacing: 2) {
                         Image(systemName: "mappin.circle.fill")
                             .foregroundColor(.red)
+                            .font(.title2)
                         Text(building.name)
                             .font(.caption2)
                             .fixedSize()
                     }
                     .onTapGesture {
+                        vm.selectedBuilding = building
                         withAnimation {
-                            region.center = building.coordinate
+                            cameraPosition = .region(
+                                MKCoordinateRegion(
+                                    center: building.coordinate,
+                                    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                                )
+                            )
                         }
                     }
                 }
             }
-            .ignoresSafeArea()
+        }
+        .ignoresSafeArea()
+        .overlay(alignment: .bottom) {
+            if let selected = vm.selectedBuilding {
+                Button(action: {
+                    openInAppleMaps(destination: selected)
+                }) {
+                    Text("Get Directions to \(selected.name)")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.red)
+                        .cornerRadius(10)
+                        .padding()
+                }
+            }
         }
     }
+
+    func openInAppleMaps(destination: CampusBuilding) {
+        let destinationPlacemark = MKPlacemark(coordinate: destination.coordinate)
+        let mapItem = MKMapItem(placemark: destinationPlacemark)
+        mapItem.name = destination.name
+
+        let launchOptions = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking
+        ]
+
+        mapItem.openInMaps(launchOptions: launchOptions)
+    }
+}
 
 #Preview {
     MapView()
