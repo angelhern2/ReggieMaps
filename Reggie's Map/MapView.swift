@@ -155,6 +155,19 @@ struct MapView: View {
                                    .cornerRadius(10)
                            }
                        }
+                       HStack(spacing: 10) {
+                           Button(action: {
+                               vm.openInGoogleMaps(coordinate: selected.coordinate)
+                           }) {
+                               Label("Open in Google Maps", systemImage: "map")
+                                   .foregroundColor(.white)
+                                   .padding()
+                                   .frame(maxWidth: .infinity)
+                                   .background(Color.green)
+                                   .cornerRadius(10)
+                           
+                           }
+                       }
                        .padding([.horizontal, .bottom])
                    }
                    .background(.ultraThinMaterial)
