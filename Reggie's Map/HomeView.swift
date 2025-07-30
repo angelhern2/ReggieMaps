@@ -7,6 +7,7 @@ struct HomeView: View {
         ScrollView {
             VStack(spacing: 24) {
 
+
                 Text("Welcome to Illinois State University")
                     .font(.largeTitle)
                     .fontWeight(.bold)

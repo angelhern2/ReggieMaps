@@ -32,7 +32,9 @@ struct ContentView: View {
             switch selection {
             case 0:
                 searchHeaderSection                                              // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)// rectangle to create underline
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.PrimaryColor)// rectangle to create underline
                 ScrollView{
                     HomeView()
                 }
@@ -51,14 +53,18 @@ struct ContentView: View {
                 
             case 3:
                 searchHeaderSection                                                   // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)// rectangle to create underline
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.PrimaryColor)// rectangle to create underline
                 ExploreView()
             case 4:
                 ContactView()
                 
             default:
                 searchHeaderSection                                                   // header to helper with searches
-                Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)// rectangle to create underline
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.PrimaryColor)// rectangle to create underline
                 ScrollView{
                     HomeView()
                 }

@@ -37,6 +37,7 @@ struct MapView: View {
                                 cameraPosition = .region(
                                     MKCoordinateRegion(
                                         center: suggestion.building.coordinate,
+
                                         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
                                     )
                                 )
@@ -45,6 +46,7 @@ struct MapView: View {
                         }
                 }
             }
+
                 .frame( maxHeight: 90)
         }
         VStack {

@@ -5,7 +5,9 @@ import CoreLocation
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var buildings: [CampusBuilding] = []
+
     @Published var selectedBuildingShowing: [CampusBuilding] = []   // help us
+
     @Published var selectedBuilding: CampusBuilding?
     @Published var route: MKRoute?
     @Published var searchText: String = ""
