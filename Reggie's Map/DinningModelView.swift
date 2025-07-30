@@ -7,6 +7,7 @@ class DinningModelView: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var errorMessage: String?
     @Published var isLoading = false
     @Published var locationAuthorizationStatus: CLAuthorizationStatus?
+    
 
     private let locationManager = CLLocationManager()
     
@@ -23,19 +24,19 @@ class DinningModelView: NSObject, ObservableObject, CLLocationManagerDelegate {
     func startSearchingNearby() {
         // Use actual user location if available, else fallback to ISU coords
         if let userLocation = locationManager.location {
-            searchNearbyRestaurants(location: userLocation)
+            searchNearbyRestaurants(location: userLocation, searchterm: "")
         } else {
-            searchNearbyRestaurants(location: isuLocation)
+            searchNearbyRestaurants(location: isuLocation, searchterm: "")
         }
     }
     
-    private func searchNearbyRestaurants(location: CLLocation) {
+    private func searchNearbyRestaurants(location: CLLocation, searchterm: String?) {
         isLoading = true
         errorMessage = nil
         restaurants = []
         
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "Restaurant"
+        request.naturalLanguageQuery = "\(searchterm ?? "") Restaurant"
         request.region = MKCoordinateRegion(
             center: location.coordinate,
             latitudinalMeters: 10000,    // 10 km radius for wide coverage
@@ -70,6 +71,16 @@ class DinningModelView: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    //hopefully the fucntion to search anthing and sort by relvency in when searching
+    func searchByRelevance(query: String) {
+        
+        if let userLocation = locationManager.location {
+            searchNearbyRestaurants(location: userLocation, searchterm: query )
+        } else{
+            searchNearbyRestaurants(location: isuLocation, searchterm: query )
+        }
+    }
+    
     // MARK: CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -88,13 +99,13 @@ class DinningModelView: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             manager.stopUpdatingLocation()  // stop updates to save battery
-            searchNearbyRestaurants(location: location)
+            searchNearbyRestaurants(location: location , searchterm: "")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         errorMessage = "Location error: \(error.localizedDescription)"
         // Fallback to ISU location search if needed
-        searchNearbyRestaurants(location: isuLocation)
+        searchNearbyRestaurants(location: isuLocation, searchterm: "")
     }
 }

@@ -1,19 +1,19 @@
 //
-//  SettingsView.swift
+//  ContactView.swift
 //  Reggie's Map
 //
 //  Created by angel hernandez on 6/23/25.
 //
 import SwiftUI
 
-struct SettingsView: View {
+struct ContactView: View {
     var body: some View {
         
-        Text("settings page")
+        Text("Contact page")
         
     }
 }
 
 #Preview {
-    SettingsView()
+    ContactView()
 }

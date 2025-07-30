@@ -1,17 +1,25 @@
 import SwiftUI
 
+
 struct DinningView: View {
+        
     @StateObject private var viewModel = DinningModelView()
+    
+    // these peramter will be pass when searching
+    var userSearch: String?
+    @Binding var searchButtonPressed: Bool
+    
 
     var body: some View {
         NavigationView {
+            
             VStack {
+                
                 if let error = viewModel.errorMessage {
                     Text(error)
                         .foregroundColor(.red)
                         .padding()
                 }
-                
                 if viewModel.isLoading {
                     ProgressView("Searching nearby restaurants...")
                         .padding()
@@ -41,22 +49,32 @@ struct DinningView: View {
                     .listStyle(InsetGroupedListStyle())
                 }
             }
+            .onChange(of: searchButtonPressed) {
+                if (searchButtonPressed){
+                    viewModel.searchByRelevance( query: userSearch ?? "")
+                    searchButtonPressed = false
+                }
+            }
+            
             .navigationTitle("Nearby Restaurants")
             .toolbar {
+                
                 Button(action: {
-                    viewModel.startSearchingNearby()
+                        viewModel.startSearchingNearby()
                 }) {
                     Image(systemName: "arrow.clockwise")
                 }
                 .accessibilityLabel("Refresh")
             }
             .onAppear {
-                viewModel.startSearchingNearby()
+                    viewModel.startSearchingNearby()
             }
+            
         }
+        
     }
+    
 }
 
-#Preview {
-    DinningView()
-}
+
+

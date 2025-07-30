@@ -7,24 +7,6 @@ struct HomeView: View {
         ScrollView {
             VStack(spacing: 24) {
 
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        Task {
-                            await viewModel.fetchNews()
-                        }
-                    }) {
-                        Image(systemName: "arrow.clockwise")
-                        Text("Refresh")
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                    .background(Color.blue.opacity(0.2))
-                    .cornerRadius(8)
-                    Spacer()
-                }
-                .padding(.top)
-
                 Text("Welcome to Illinois State University")
                     .font(.largeTitle)
                     .fontWeight(.bold)

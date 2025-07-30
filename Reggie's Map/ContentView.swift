@@ -23,6 +23,7 @@ struct ContentView: View {
     @State private var isSearchablePage: Bool = false
     @State private var searchBarInput: String = ""
     @State private var searchBarPrompt: String = ""
+    @State private var searchButtonIsPressed: Bool = false
     
     
     
@@ -39,21 +40,21 @@ struct ContentView: View {
             case 1:
                 searchHeaderSection                                                   // header to helper with searches
                 Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)  // rectangle to create underline
-                MapView()
+                MapView(userSearch: $searchBarInput , searchButtonPressed: $searchButtonIsPressed)
                 
             case 2:
                 searchHeaderSection                                                   // header to helper with searches
                 Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)  // rectangle to create underline
-                ScrollView{
-                    DinningView()
-                }
+                
+                // will have to make a bif stattment here with if searched , we switch to difffrent paremeter view
+                DinningView(userSearch: searchBarInput , searchButtonPressed: $searchButtonIsPressed )
                 
             case 3:
                 searchHeaderSection                                                   // header to helper with searches
                 Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)// rectangle to create underline
                 ExploreView()
             case 4:
-                SettingsView()
+                ContactView()
                 
             default:
                 searchHeaderSection                                                   // header to helper with searches
@@ -61,6 +62,7 @@ struct ContentView: View {
                 ScrollView{
                     HomeView()
                 }
+            
             }
         }
         // this is the footer / navagation bar
@@ -134,9 +136,9 @@ struct ContentView: View {
                 searchBarPrompt = ""
                 searchBarInput = ""
             } label: {
-                Image(systemName: "gearshape.circle")
+                Image(systemName: "questionmark.circle")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)                             // settings button
+                    .aspectRatio(contentMode: .fit)                             // help button
                     .frame(maxWidth: .infinity , maxHeight: .infinity)
                     .foregroundColor(.PrimaryColor)
                     .padding(.top ,10)
@@ -178,11 +180,18 @@ struct ContentView: View {
                     {
                         TextField("\(searchBarPrompt)", text: $searchBarInput)   //TextField for the lookup
                             .padding(5) .background(Color(.systemGray6)) .cornerRadius(5)
-                        Button("Search"){ } .buttonStyle(.borderedProminent)  .cornerRadius(10) .disabled(searchBarInput.isEmpty)  // button to actually trigger the search
+                        Button("Search"){
+                            withAnimation{
+                                searchButtonIsPressed = true
+                            }
+                        } .buttonStyle(.borderedProminent)  .cornerRadius(10) .disabled(searchBarInput.isEmpty)  // button to actually trigger the search
                         
                         Spacer()
                         Button (action: {searchBarIsPresented .toggle()})   // button to toggle search bar
-                        { Image(systemName: "xmark") .resizable() .frame(width: 20, height: 20) .foregroundColor(.SecondaryColor) }   // the lookup button symbol
+                        { Image(systemName: "xmark") .resizable() .frame(width: 20, height: 20) .foregroundColor(.SecondaryColor) .onTapGesture {
+                            searchBarIsPresented.toggle()
+                            searchBarInput = ""
+                        } }   // the lookup button symbol
                     }
                 }    // end braket of with search bar headaer
                 
