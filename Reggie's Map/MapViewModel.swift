@@ -188,14 +188,16 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // Open Google Maps if installed, else fallback to Apple Maps
     func openInGoogleMaps(coordinate: CLLocationCoordinate2D) {
-        let urlStr = "comgooglemaps://?q=\(coordinate.latitude),\(coordinate.longitude)&zoom=14"
+        let urlStr = "comgooglemaps://?daddr=\(coordinate.latitude),\(coordinate.longitude)&directionsmode=walking"
+        
         if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
-            // Google Maps app not installed, open Apple Maps instead
+            // Fallback to Apple Maps
             openInAppleMaps(coordinate: coordinate, name: "")
         }
     }
+
     
     
     
