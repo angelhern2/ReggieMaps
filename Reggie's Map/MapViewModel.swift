@@ -1,3 +1,5 @@
+// Created by Tanvai Pohare on 7/19/25
+
 import Foundation
 import MapKit
 import CoreLocation
@@ -174,6 +176,25 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             
         }
         
+    }
+    
+    // Open Apple Maps with the destination coordinate
+    func openInAppleMaps(coordinate: CLLocationCoordinate2D, name: String) {
+        let placemark = MKPlacemark(coordinate: coordinate)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = name
+        mapItem.openInMaps(launchOptions: nil)
+    }
+    
+    // Open Google Maps if installed, else fallback to Apple Maps
+    func openInGoogleMaps(coordinate: CLLocationCoordinate2D) {
+        let urlStr = "comgooglemaps://?q=\(coordinate.latitude),\(coordinate.longitude)&zoom=14"
+        if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            // Google Maps app not installed, open Apple Maps instead
+            openInAppleMaps(coordinate: coordinate, name: "")
+        }
     }
     
     

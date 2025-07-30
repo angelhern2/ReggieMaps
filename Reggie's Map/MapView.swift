@@ -1,3 +1,5 @@
+// Created by Tanvai Pohare on 7/19/25
+
 import SwiftUI
 import MapKit
 
@@ -134,6 +136,19 @@ struct MapView: View {
                        .frame(maxWidth: .infinity)
                        .background(Color.red)
                        .cornerRadius(10)
+                       
+                       HStack(spacing: 10) {
+                           Button(action: {
+                               vm.openInAppleMaps(coordinate: selected.coordinate, name: selected.name)
+                           }) {
+                               Label("Open in Apple Maps", systemImage: "map")
+                                   .foregroundColor(.white)
+                                   .padding()
+                                   .frame(maxWidth: .infinity)
+                                   .background(Color.green)
+                                   .cornerRadius(10)
+                           }
+                       }
                        .padding([.horizontal, .bottom])
                    }
                    .background(.ultraThinMaterial)
