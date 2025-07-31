@@ -14,6 +14,7 @@ struct Restaurant: Identifiable {
     let address: String
     let phone: String?
     let website: String?
-    let image: String?           // Optional for static/fallback images
+    let image: String?
     let coordinate: CLLocationCoordinate2D?
+    let distance: Double?    // distance in miles
 }
