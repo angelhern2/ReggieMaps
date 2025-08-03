@@ -104,12 +104,13 @@ struct MapView: View {
 
                // Directions & Route Section
                if let selected = vm.selectedBuilding {
-                   VStack(spacing: 8) {
+                   VStack {
                        HStack{
-                           
+                           Spacer()
                            Text("Directions to \(selected.name)")
                                .font(.headline)
-                               .padding(.top)
+                             //  .padding(.top)
+                           Spacer()
                            Image(systemName: "xmark")
                                .padding(.leading)
                                .onTapGesture {
@@ -120,6 +121,7 @@ struct MapView: View {
                                    
                            }
                        }
+                       .padding()
                        if let route = vm.route {
                            ScrollView {
                                VStack(alignment: .leading, spacing: 4) {
@@ -142,8 +144,9 @@ struct MapView: View {
                        .frame(maxWidth: .infinity)
                        .background(Color.red)
                        .cornerRadius(10)
+                       .padding([.horizontal, .bottom])
                        
-                       HStack(spacing: 10) {
+                       HStack {
                            Button(action: {
                                vm.openInAppleMaps(coordinate: selected.coordinate, name: selected.name)
                            }) {
@@ -153,9 +156,10 @@ struct MapView: View {
                                    .frame(maxWidth: .infinity)
                                    .background(Color.green)
                                    .cornerRadius(10)
+                                   .padding([.horizontal, .bottom])
                            }
                        }
-                       HStack(spacing: 10) {
+                       HStack(spacing: 2) {
                            Button(action: {
                                vm.openInGoogleMaps(coordinate: selected.coordinate)
                            }) {
