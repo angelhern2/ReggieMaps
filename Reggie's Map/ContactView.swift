@@ -52,7 +52,7 @@ struct ContactView: View {
                             Spacer()
                             socialButton( buttonUrl: "https://www.tiktok.com/@illinoisstateu?lan", buttonImage: "ttlogo")//Tik-Tok
                             Spacer()
-                            socialButton(buttonUrl: "https://open.spotify.com", buttonImage: "spotifylogo")// Spotify ned to link latr when i am signed out
+                            socialButton(buttonUrl: "https://open.spotify.com/user/52bptpfzmse35fjaxv1alnhmp?si=pxgNNspJQKuZAqr_aO0S7Q", buttonImage: "spotifylogo")// Spotify ned to link latr when i am signed out
                             Spacer()
                         }
                     Divider()

@@ -1,27 +1,21 @@
-//
-//  DinningView.swift
-//  Reggie's Map
-//
-//  Created by angel hernandez   , Tanvai Pohare  , matt Strand , justin ray    on 6/17/25.
-
-
 import SwiftUI
 import MapKit
 
 struct DinningView: View {
     @StateObject private var viewModel = DinningModelView()
-    
+
     var userSearch: String?
     @Binding var searchButtonPressed: Bool
 
     var body: some View {
         NavigationView {
-            VStack {
+            ScrollView {
                 if let error = viewModel.errorMessage {
                     Text(error)
                         .foregroundColor(.red)
                         .padding()
                 }
+
                 if viewModel.isLoading {
                     ProgressView("Searching nearby restaurants...")
                         .padding()
@@ -29,49 +23,64 @@ struct DinningView: View {
                     Text("No restaurants found nearby.")
                         .padding()
                 } else {
-                    List(viewModel.restaurants) { restaurant in
-                        HStack(alignment: .top) {
-                            // Left side: Restaurant info
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text(restaurant.name)
-                                    .font(.headline)
-                                Text(restaurant.address)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                if let distance = restaurant.distance {
-                                    Text(String(format: "%.1f miles away", distance))
-                                        .font(.footnote)
-                                        .foregroundColor(.gray)
+                    LazyVStack(alignment: .leading, spacing: 16) {
+                        ForEach(viewModel.restaurants) { restaurant in
+                            HStack(alignment: .top) {
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text(restaurant.name)
+                                        .font(.headline)
+
+                                    Text(restaurant.address)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+
+                                    if let distance = restaurant.distance {
+                                        Text(String(format: "%.1f miles away", distance))
+                                            .font(.footnote)
+                                            .foregroundColor(.gray)
+                                    }
+
+                                    if let phone = restaurant.phone {
+                                        let phoneDigits = phone.filter { $0.isNumber }
+                                        if let phoneURL = URL(string: "tel://\(phoneDigits)") {
+                                            Link("📞 \(phone)", destination: phoneURL)
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+
+                                    if let website = restaurant.website {
+                                        let formatted = website.hasPrefix("http") ? website : "https://\(website)"
+                                        if let url = URL(string: formatted) {
+                                            Link("🌐 \(formatted)", destination: url)
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                                .lineLimit(1)
+                                                .truncationMode(.middle)
+                                        }
+                                    }
                                 }
-                                if let phone = restaurant.phone {
-                                    Text("Phone: \(phone)")
-                                        .font(.footnote)
+
+                                Spacer()
+
+                                Button(action: {
+                                    openInMaps(restaurant: restaurant)
+                                }) {
+                                    Image(systemName: "map.fill")
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
                                 }
-                                if let website = restaurant.website {
-                                    Text("Website: \(website)")
-                                        .font(.footnote)
-                                        .foregroundColor(.blue)
-                                }
+                                .accessibilityLabel("Open in Maps")
                             }
-                            Spacer()
-                            // Right side: Open in Maps button
-                            Button(action: {
-                                openInMaps(restaurant: restaurant)
-                            }) {
-                                Image(systemName: "map")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.blue)
-                                    .padding(8)
-                            }
-                            .background(Color.blue.opacity(0.1))
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .buttonStyle(PlainButtonStyle()) // prevent row highlight on tap
+                            .padding()
+                            .background(Color(UIColor.systemGroupedBackground))
+                            .cornerRadius(12)
+                            .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
                         }
-                        .padding(.vertical, 6)
                     }
-                    .listStyle(InsetGroupedListStyle())
+                    .padding()
                 }
             }
             .onChange(of: searchButtonPressed) { pressed in
@@ -87,7 +96,6 @@ struct DinningView: View {
                 }) {
                     Image(systemName: "arrow.clockwise")
                 }
-                .accessibilityLabel("Refresh")
             }
             .onAppear {
                 viewModel.startSearchingNearby()
@@ -100,6 +108,8 @@ struct DinningView: View {
         let placemark = MKPlacemark(coordinate: coordinate)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = restaurant.name
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+        mapItem.openInMaps(launchOptions: [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+        ])
     }
 }

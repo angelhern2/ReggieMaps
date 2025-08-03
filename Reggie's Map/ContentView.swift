@@ -127,7 +127,7 @@ struct ContentView: View {
             Button{
                 selection = 3
                 searchBarIsPresented = false
-                isSearchablePage = true
+                isSearchablePage = false
                 searchBarPrompt = "Search for Events"
                 searchBarInput = ""
             } label: {
