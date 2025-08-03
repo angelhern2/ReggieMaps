@@ -1,32 +1,21 @@
-//
-//  DinningView.swift
-//  Reggie's Map
-//
-//  Created by angel hernandez   , Tanvai Pohare  , matt Strand , justin ray    on 6/17/25.
-
-
 import SwiftUI
-
+import MapKit
 
 struct DinningView: View {
-        
     @StateObject private var viewModel = DinningModelView()
-    
-    // these peramter will be pass when searching
+
     var userSearch: String?
     @Binding var searchButtonPressed: Bool
-    
 
     var body: some View {
         NavigationView {
-            
-            VStack {
-                
+            ScrollView {
                 if let error = viewModel.errorMessage {
                     Text(error)
                         .foregroundColor(.red)
                         .padding()
                 }
+
                 if viewModel.isLoading {
                     ProgressView("Searching nearby restaurants...")
                         .padding()
@@ -34,56 +23,93 @@ struct DinningView: View {
                     Text("No restaurants found nearby.")
                         .padding()
                 } else {
-                    List(viewModel.restaurants) { restaurant in
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text(restaurant.name)
-                                .font(.headline)
-                            Text(restaurant.address)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            if let phone = restaurant.phone {
-                                Text("Phone: \(phone)")
-                                    .font(.footnote)
+                    LazyVStack(alignment: .leading, spacing: 16) {
+                        ForEach(viewModel.restaurants) { restaurant in
+                            HStack(alignment: .top) {
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text(restaurant.name)
+                                        .font(.headline)
+
+                                    Text(restaurant.address)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+
+                                    if let distance = restaurant.distance {
+                                        Text(String(format: "%.1f miles away", distance))
+                                            .font(.footnote)
+                                            .foregroundColor(.gray)
+                                    }
+
+                                    if let phone = restaurant.phone {
+                                        let phoneDigits = phone.filter { $0.isNumber }
+                                        if let phoneURL = URL(string: "tel://\(phoneDigits)") {
+                                            Link("📞 \(phone)", destination: phoneURL)
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+
+                                    if let website = restaurant.website {
+                                        let formatted = website.hasPrefix("http") ? website : "https://\(website)"
+                                        if let url = URL(string: formatted) {
+                                            Link("🌐 \(formatted)", destination: url)
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                                .lineLimit(1)
+                                                .truncationMode(.middle)
+                                        }
+                                    }
+                                }
+
+                                Spacer()
+
+                                Button(action: {
+                                    openInMaps(restaurant: restaurant)
+                                }) {
+                                    Image(systemName: "map.fill")
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                }
+                                .accessibilityLabel("Open in Maps")
                             }
-                            if let website = restaurant.website {
-                                
-                                Link("Website : \(website)", destination: URL(string: "\(website)")!)
-                                    .font(.footnote)
-                                    .foregroundColor(.blue)
-                                
-                            }
+                            .padding()
+                            .background(Color(UIColor.systemGroupedBackground))
+                            .cornerRadius(12)
+                            .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
                         }
-                        .padding(.vertical, 4)
                     }
-                    .listStyle(InsetGroupedListStyle())
+                    .padding()
                 }
             }
-            .onChange(of: searchButtonPressed) {
-                if (searchButtonPressed){
-                    viewModel.searchByRelevance( query: userSearch ?? "")
+            .onChange(of: searchButtonPressed) { pressed in
+                if pressed {
+                    viewModel.searchByRelevance(query: userSearch ?? "")
                     searchButtonPressed = false
                 }
             }
-            
             .navigationTitle("Nearby Restaurants")
             .toolbar {
-                
                 Button(action: {
-                        viewModel.startSearchingNearby()
+                    viewModel.startSearchingNearby()
                 }) {
                     Image(systemName: "arrow.clockwise")
                 }
-                .accessibilityLabel("Refresh")
             }
             .onAppear {
-                    viewModel.startSearchingNearby()
+                viewModel.startSearchingNearby()
             }
-            
         }
-        
     }
-    
+
+    private func openInMaps(restaurant: Restaurant) {
+        guard let coordinate = restaurant.coordinate else { return }
+        let placemark = MKPlacemark(coordinate: coordinate)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = restaurant.name
+        mapItem.openInMaps(launchOptions: [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+        ])
+    }
 }
-
-
-

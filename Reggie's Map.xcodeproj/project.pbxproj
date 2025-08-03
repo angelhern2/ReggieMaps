@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4F2BE5322E3D487F00A795C3 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 4F2BE5312E3D487F00A795C3 /* SwiftSoup */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		464FA9542E026585005B459B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F2BE5322E3D487F00A795C3 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = "Reggie's Map";
 			packageProductDependencies = (
+				4F2BE5312E3D487F00A795C3 /* SwiftSoup */,
 			);
 			productName = "Reggie's Map";
 			productReference = 464FA9462E026582005B459B /* Reggie's Map.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 464FA93D2E026582005B459B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4F2BE5302E3D487F00A795C3 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 464FA9472E026582005B459B /* Products */;
 			projectDirPath = "";
@@ -572,6 +581,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4F2BE5302E3D487F00A795C3 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4F2BE5312E3D487F00A795C3 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F2BE5302E3D487F00A795C3 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 464FA93E2E026582005B459B /* Project object */;
 }

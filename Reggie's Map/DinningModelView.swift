@@ -14,12 +14,9 @@ class DinningModelView: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var errorMessage: String?
     @Published var isLoading = false
     @Published var locationAuthorizationStatus: CLAuthorizationStatus?
-    
 
     private let locationManager = CLLocationManager()
-    
-    // Illinois State University approx location
-    private let isuLocation = CLLocation(latitude: 40.5128, longitude: -88.9941)
+    private var currentLocation: CLLocation?
 
     override init() {
         super.init()
@@ -29,90 +26,116 @@ class DinningModelView: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func startSearchingNearby() {
-        // Use actual user location if available, else fallback to ISU coords
-        if let userLocation = locationManager.location {
-            searchNearbyRestaurants(location: userLocation, searchterm: "")
+        if let location = locationManager.location {
+            currentLocation = location
+            searchNearbyRestaurants(at: location, query: "")
         } else {
-            searchNearbyRestaurants(location: isuLocation, searchterm: "")
-        }
-    }
-    
-    private func searchNearbyRestaurants(location: CLLocation, searchterm: String?) {
-        isLoading = true
-        errorMessage = nil
-        restaurants = []
-        
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "\(searchterm ?? "") Restaurant"
-        request.region = MKCoordinateRegion(
-            center: location.coordinate,
-            latitudinalMeters: 10000,    // 10 km radius for wide coverage
-            longitudinalMeters: 10000
-        )
-        
-        let search = MKLocalSearch(request: request)
-        search.start { [weak self] response, error in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                if let error = error {
-                    self?.errorMessage = "Search error: \(error.localizedDescription)"
-                    return
-                }
-                
-                guard let mapItems = response?.mapItems else {
-                    self?.errorMessage = "No restaurants found nearby."
-                    return
-                }
-                
-                self?.restaurants = mapItems.map {
-                    Restaurant(
-                        name: $0.name ?? "Unknown",
-                        address: $0.placemark.title ?? "No Address",
-                        phone: $0.phoneNumber,
-                        website: $0.url?.absoluteString,
-                        image: nil,
-                        coordinate: $0.placemark.coordinate
-                    )
+            locationManager.startUpdatingLocation()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                if self.currentLocation == nil {
+                    self.useFallbackLocation()
                 }
             }
         }
     }
-    
-    //hopefully the fucntion to search anthing and sort by relvency in when searching
-    func searchByRelevance(query: String) {
-        
-        if let userLocation = locationManager.location {
-            searchNearbyRestaurants(location: userLocation, searchterm: query )
-        } else{
-            searchNearbyRestaurants(location: isuLocation, searchterm: query )
+
+    private func useFallbackLocation() {
+        let isuLocation = CLLocation(latitude: 40.5128, longitude: -88.9941)
+        currentLocation = isuLocation
+        searchNearbyRestaurants(at: isuLocation, query: "")
+    }
+
+    private func searchNearbyRestaurants(at location: CLLocation, query: String) {
+        isLoading = true
+        errorMessage = nil
+        restaurants = []
+
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = query.isEmpty ? "restaurant" : "\(query) restaurant"
+        request.region = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: 10000,
+            longitudinalMeters: 10000
+        )
+
+        let search = MKLocalSearch(request: request)
+        search.start { [weak self] response, error in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                guard let self = self else { return }
+
+                if let error = error {
+                    self.errorMessage = "Error: \(error.localizedDescription)"
+                    return
+                }
+
+                guard let mapItems = response?.mapItems else {
+                    self.errorMessage = "No nearby restaurants found."
+                    return
+                }
+
+                self.restaurants = mapItems.compactMap { item in
+                    let coordinate = item.placemark.coordinate
+                    let distanceInMeters = self.currentLocation?.distance(from: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) ?? 0
+                    let distanceInMiles = distanceInMeters / 1609.34
+
+                    return Restaurant(
+                        name: item.name ?? "Unnamed",
+                        address: item.placemark.title ?? "No Address",
+                        phone: item.phoneNumber,
+                        website: item.url?.absoluteString,
+                        image: nil,
+                        coordinate: coordinate,
+                        distance: round(distanceInMiles * 10) / 10 // 1 decimal place
+                    )
+                }
+                .sorted(by: { ($0.distance ?? 0) < ($1.distance ?? 0) })
+            }
         }
     }
-    
-    // MARK: CLLocationManagerDelegate
-    
+
+    func searchByRelevance(query: String) {
+        if let location = locationManager.location {
+            currentLocation = location
+            searchNearbyRestaurants(at: location, query: query)
+        } else {
+            locationManager.startUpdatingLocation()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                if let location = self.locationManager.location {
+                    self.currentLocation = location
+                    self.searchNearbyRestaurants(at: location, query: query)
+                } else {
+                    self.useFallbackLocation()
+                }
+            }
+        }
+    }
+
+    // MARK: - CLLocationManagerDelegate
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         locationAuthorizationStatus = status
+
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             manager.startUpdatingLocation()
         case .denied, .restricted:
-            // No permission, fallback to ISU static search
-            startSearchingNearby()
+            useFallbackLocation()
         default:
             break
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            manager.stopUpdatingLocation()  // stop updates to save battery
-            searchNearbyRestaurants(location: location , searchterm: "")
+            currentLocation = location
+            manager.stopUpdatingLocation()
+            searchNearbyRestaurants(at: location, query: "")
         }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        errorMessage = "Location error: \(error.localizedDescription)"
-        // Fallback to ISU location search if needed
-        searchNearbyRestaurants(location: isuLocation, searchterm: "")
+        errorMessage = "Location failed: \(error.localizedDescription)"
+        useFallbackLocation()
     }
 }
