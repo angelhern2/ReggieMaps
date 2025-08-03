@@ -193,13 +193,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // Open Google Maps if installed, else fallback to Apple Maps
     func openInGoogleMaps(coordinate: CLLocationCoordinate2D) {
-        let urlStr = "comgooglemaps://?daddr=\(coordinate.latitude),\(coordinate.longitude)&directionsmode=walking"
-        
-        if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-            // Fallback to Apple Maps
-            openInAppleMaps(coordinate: coordinate, name: "")
+        let lat = coordinate.latitude
+        let lon = coordinate.longitude
+        if let url = URL(string: "comgooglemaps://?center=\(lat),\(lon)&zoom=14"),
+           UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else if let webUrl = URL(string: "https://www.google.com/maps/search/?api=1&query=\(lat),\(lon)") {
+            UIApplication.shared.open(webUrl)
         }
     }
 
