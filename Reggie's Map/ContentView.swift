@@ -42,7 +42,7 @@ struct ContentView: View {
             case 1:
                 searchHeaderSection                                                   // header to helper with searches
                 Rectangle().frame(height: 1) . foregroundColor(.PrimaryColor)  // rectangle to create underline
-                MapView(userSearch: $searchBarInput , searchButtonPressed: $searchButtonIsPressed)
+                MapView(userSearch: $searchBarInput , searchButtonPressed: $searchButtonIsPressed, searchBarPresent: $searchBarIsPresented)
                 
             case 2:
                 searchHeaderSection                                                   // header to helper with searches
@@ -189,7 +189,9 @@ struct ContentView: View {
                     if searchBarIsPresented                          // if search button was pressed then show the lookup field
                     {
                         TextField("\(searchBarPrompt)", text: $searchBarInput)   //TextField for the lookup
-                            .padding(5) .background(Color(.systemGray6)) .cornerRadius(5)
+                            .padding(5) .background(Color(.systemGray6)) .cornerRadius(5) .onSubmit {
+                                searchButtonIsPressed = true
+                            }
                         Button("Search"){
                             withAnimation{
                                 searchButtonIsPressed = true

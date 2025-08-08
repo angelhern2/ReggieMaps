@@ -12,6 +12,8 @@ import MapKit
 struct MapView: View {
     @Binding var userSearch: String
     @Binding var searchButtonPressed: Bool
+    
+    @Binding var searchBarPresent: Bool
 
     @StateObject private var vm = MapViewModel()
 
@@ -179,6 +181,11 @@ struct MapView: View {
                   searchButtonPressed = false
               }
           }
+          .onChange(of: searchBarPresent) {
+              vm.selectedBuilding = nil
+              vm.selectedBuildingShowing = vm.buildings
+          }
+        
       }
   }
     

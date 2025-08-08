@@ -86,7 +86,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 CampusBuilding(buildingCode: ["Honors Program Campus Building","HPB (000-499)","Enterprise Data and Analytics","Honors Program"],name: "Honors Program Campus Building", coordinate: CLLocationCoordinate2D(latitude: 40.5091, longitude: -88.99508)),
                 CampusBuilding(buildingCode: ["Horton Field House","HTN (000-499)","Exercise Physiology Laboratory","Gamma Phi Circus","Horton Pool","North Gym","Sports Information Office","Redbird Track & Field Complex"],name: "Horton Field House", coordinate: CLLocationCoordinate2D(latitude: 40.5122, longitude: -88.99853)),
                 CampusBuilding(buildingCode: ["Hancock Stadium","Hancock Stadium Club"], name: "Hancock Stadium", coordinate: CLLocationCoordinate2D(latitude: 40.5125, longitude: -88.99662)),
-                CampusBuilding(buildingCode: ["Hewett Hall","HEW (000-899)","Dorms"],name: "Hewett Hall", coordinate: CLLocationCoordinate2D(latitude: 40.51069, longitude: -88.98748)),
+                CampusBuilding(buildingCode: ["Hewett Hall","HEW (000-899)"],name: "Hewett Hall", coordinate: CLLocationCoordinate2D(latitude: 40.51069, longitude: -88.98748)),
                 CampusBuilding(buildingCode: ["Horticulture Center"],name: "Horticulture Center", coordinate: CLLocationCoordinate2D(latitude: 40.531822, longitude: -89.002985)),
                 CampusBuilding(buildingCode: ["Hudelson Building","HUD (000-499)","English Language Institute"],name: "Hudelson Building", coordinate: CLLocationCoordinate2D(latitude: 40.51397, longitude: -88.99545)),
                 //i
@@ -99,7 +99,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 //l
                 CampusBuilding(buildingCode: ["Linkins Center","LIN "],name: "Linkins Center", coordinate: CLLocationCoordinate2D(latitude: 40.51218, longitude: -89.00051)),
                 //m
-                CampusBuilding(buildingCode: ["Manchester Hall","MAN (000-899)","Dorms"],name: "Manchester Hall", coordinate: CLLocationCoordinate2D(latitude: 40.51106,    longitude: -88.98798)),
+                CampusBuilding(buildingCode: ["Manchester Hall","MAN (000-899)"],name: "Manchester Hall", coordinate: CLLocationCoordinate2D(latitude: 40.51106,    longitude: -88.98798)),
                 CampusBuilding(buildingCode: ["Marian Kneer Softball Stadium"],name: "Marian Kneer Softball Stadium", coordinate: CLLocationCoordinate2D(latitude: 40.51396,    longitude: -89.00097)),
                 CampusBuilding(buildingCode: ["Milner Library","MLB (000-599)", "Administration Office" ,"Dr. Jo Ann Rayfield Archives","Illinois Regional Archives Repository (IRAD)","Milner Library","Milner Library uLab","Reference Desk","Special Collections","Study Spaces" ,"The Library of Congress Teaching with Primary Sources Midwest Region","Wonsook Kim College of Fine Arts"],name: "Milner Library", coordinate: CLLocationCoordinate2D(latitude: 40.511348, longitude: -88.990825)),
                 CampusBuilding(buildingCode: ["McCormick Hall","SFCM (000-499)","Health Promotion and Wellness","Sports Medicine and Rehabilitation Therapy Clinic","School of Kinesiology and Recreation Academic Advisement","School of Kinesiology and Recreation"],name: "McCormick Hall", coordinate: CLLocationCoordinate2D(latitude: 40.507615, longitude: -88.992170)),
@@ -146,7 +146,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 CampusBuilding(buildingCode: ["Vitro Center"],name: "Vitro Center", coordinate: CLLocationCoordinate2D(latitude: 40.51398, longitude: -88.99617)),
                 CampusBuilding(buildingCode: ["Vrooman Center","Association of Residence Halls" ,"International House","Julia N Visor Academic Center"],name: "Vrooman Center", coordinate: CLLocationCoordinate2D(latitude: 40.510693, longitude: -88.987828)),
                 //w
-                CampusBuilding(buildingCode: ["Watterson Towers","Watterson","WAN-WEN (000-499)","WAS-WES (000-499)","Dorm"],name: "Watterson Towers", coordinate: CLLocationCoordinate2D(latitude: 40.508163, longitude: -88.987783)),
+                CampusBuilding(buildingCode: ["Watterson Towers","Watterson","WAN-WEN (000-499)","WAS-WES (000-499)"],name: "Watterson Towers", coordinate: CLLocationCoordinate2D(latitude: 40.508163, longitude: -88.987783)),
                 CampusBuilding(buildingCode: ["Weibring Golf Club" ,"Golf Club", "Weibring","Golf"],name: "Weibring Golf Club", coordinate: CLLocationCoordinate2D(latitude:40.517718, longitude: -89.004493)),
                 CampusBuilding(buildingCode: ["Wilkins","Wilkins Hall","WIL (000-499)"],name: "Wilkins Hall", coordinate: CLLocationCoordinate2D(latitude: 40.511679, longitude: -89.000316)),
                 CampusBuilding(buildingCode: ["Watterson Dining Commons","WDC (000-499)"],name: "Watterson Dining Commons", coordinate: CLLocationCoordinate2D(latitude: 40.50902, longitude: -88.98766)),
